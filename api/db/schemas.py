@@ -28,6 +28,10 @@ class Book(BaseModel):
     publication_year: int
     genre: Genre
 
+    def to_dict(self):
+        """To get the dictionary representation of the class"""
+        return self.__dict__
+
 
 class InMemoryDB:
     def __init__(self):

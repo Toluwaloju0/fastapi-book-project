@@ -1,0 +1,14 @@
+name: CI_pipline
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image: python
+    steps:
+      - uses: actions/checkout@v3
+      - run: pip3 install -r requirements.txt
+      - run: pytest

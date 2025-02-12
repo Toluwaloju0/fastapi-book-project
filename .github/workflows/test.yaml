@@ -9,5 +9,6 @@ jobs:
     container:
       image: python
     steps:
+      - uses: actions/checkout@v3
       - run: pip3 install requirements.txt
       - run: pytest

@@ -1,0 +1,21 @@
+name: CI_pipline
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    container:
+      image: python
+    steps:
+      - uses: actions/checkout@v3
+      - name: Connect via SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan 107.23.103.1 >> ~/.ssh/known_hosts
+          ssh -i ~/.ssh/id_rsa ubuntu@107.23.103.1 "mkdir -p /tmp/book_project"
+          scp -i ~/.ssh/id_rsa -r ./* ubuntu@107.23.103.1:/tmp/book_project
+          ssh -i ~/.ssh/id_rsa ubuntu@107.23.103.1 "pip3 install -r requirement.txt && sudo pkill fastapi && sudo pkill uvicorn && fastapi run && sudo systemctl restart nginx"

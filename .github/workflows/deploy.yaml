@@ -16,5 +16,5 @@ jobs:
           chmod 400 ./id_rsa
           ssh-keyscan 107.23.103.1 >> ~/.ssh/known_hosts
           ssh -i ./id_rsa ubuntu@107.23.103.1 "mkdir -p /tmp/book_project"
-          scp -i ./id_rsa -r ./* ubuntu@107.23.103.1:/tmp/book_project
-          ssh -i ./id_rsa ubuntu@107.23.103.1 "pip3 install -r requirement.txt && sudo pkill fastapi && sudo pkill uvicorn && fastapi run && sudo systemctl restart nginx"
+          scp -i ./id_rsa -r ./* ubuntu@107.23.103.1:/tmp/book_project/
+          ssh -i ./id_rsa ubuntu@107.23.103.1 "pip3 install -r requirement.txt && sudo pkill fastapi && sudo pkill uvicorn && fastapi run"

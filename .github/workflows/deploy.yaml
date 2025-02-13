@@ -10,10 +10,15 @@ jobs:
       image: python
     steps:
       - uses: actions/checkout@v3
-      - name: Connect via SSH
-        run: |
-          mkdir -p ~/.ssh
-          touch ~/.ssh/id_rsa
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 400 ~/.ssh/id_rsa
-          ssh -i ~/.ssh/id_rsa ubuntu@54.86.69.72 "cd fastapi-bbok-project && git pull"
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: 54.86.69.72
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            cd fastapi-bbok-project && git pull
+            pip install --upgrade pip
+            pip3 install -r requirement.txt
+            

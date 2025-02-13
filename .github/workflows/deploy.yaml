@@ -19,5 +19,4 @@ jobs:
           port: 22
           script: |
             sudo pkill fastapi
-            cd fastapi-book-project && git pull && sudo apt update && sudo apt install python3 && pip install --upgrade pip && pip install -r requirements.txt
-            pip3 install fastapi [standard] && fastapi run &            
+            cd fastapi-book-project && git pull && sudo apt update && sudo apt install python3 && pip install --upgrade pip && pip install -r requirements.txt && pip3 install fastapi [standard] && fastapi run &            

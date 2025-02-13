@@ -15,4 +15,4 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > id_rsa
           chmod 400 id_rsa
           pip3 install --upgrade fabric
-          fab --f fabfile.py deploy
+          fab -f fabfile.py deploy

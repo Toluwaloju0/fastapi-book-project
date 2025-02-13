@@ -16,5 +16,4 @@ jobs:
           touch ~/.ssh/id_rsa
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 400 ~/.ssh/id_rsa
-          pip3 install --upgrade fabric
-          fab -f fabfile.py deploy
+          ssh -i ~/.ssh/id_rsa ubuntu@54.86.69.72 "cd fastapi-bbok-project && git pull"

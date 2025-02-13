@@ -14,6 +14,7 @@ jobs:
         run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ./id_rsa
           chmod 400 ./id_rsa
+          mkdir -p .ssh/
           ssh-keyscan 107.23.103.1 >> ~/.ssh/known_hosts
           ssh -i ./id_rsa ubuntu@107.23.103.1 "mkdir -p /tmp/book_project"
           scp -i ./id_rsa -r ./* ubuntu@107.23.103.1:/tmp/book_project/
